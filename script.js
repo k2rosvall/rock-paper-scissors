@@ -2,19 +2,24 @@ function getComputerChoice() {
     const MOVES = ["rock", "paper", "scissors"];
     let index = Math.floor(Math.random() * 3);
 
+    console.log(`Computer chose: ${MOVES[index]}`);
     return MOVES[index];
 }
 
 function getPlayerChoice() {
     let playerChoice = prompt("Select rock, paper or scissors");
+    console.log(`Player chose: ${playerChoice.toLowerCase()}`)
     return playerChoice.toLowerCase();
 }
 
 function evaluateChoices(playerSelection, computerSelection) {
+    const WINNING_COMBINATIONS = ["rock,scissors", "paper,rock", "scissors,paper"];
+    let combination = [playerSelection, computerSelection].join();
     if (playerSelection === computerSelection) {
         console.log("It's a tie, try again!");
         evaluateChoices(getPlayerChoice(), getComputerChoice());
-    } else if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper")) {
+    }
+    else if ( WINNING_COMBINATIONS.includes(combination)) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`);
         return 0;
     } else {
