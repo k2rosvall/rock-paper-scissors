@@ -44,3 +44,25 @@ function play(playerSelection, computerSelection) {
     }
 }
 
+function game() {
+    let playerWins = 0;
+    let computerWins = 0;
+    for(let i = 0; i < 5; i++) {
+        let won = play(getPlayerChoice(), getComputerChoice());
+        if (won === 0) {
+            playerWins++;
+            console.log(`Round ${i + 1}: Player wins`);
+        } else {
+            computerWins++
+            console.log(`Round ${i + 1}: Computer wins`);
+        }
+    }
+
+    if (playerWins > computerWins) {
+        console.log("Player wins");
+    } else if (computerWins > playerWins){
+        console.log("Computer wins")
+    } else {
+        console.log("it's a tie!")
+    }
+}
