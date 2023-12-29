@@ -10,37 +10,16 @@ function getPlayerChoice() {
     return playerChoice.toLowerCase();
 }
 
-function play(playerSelection, computerSelection) {
-    if (playerSelection === "rock") {
-        if (computerSelection === "paper") {
-            console.log("You lose! Paper beats Rock");
-        } else if (computerSelection === "scissors") {
-            console.log("You win! Rock beats scissors");
-        } else {
-            console.log("It's a tie");
-            play(getPlayerChoice(), getComputerChoice());
-        }
-    } else if (playerSelection === "paper") {
-        if (computerSelection === "scissors") {
-            console.log("You lose! Scissors beats Paper");
-        } else if (computerSelection === "rock") {
-            console.log("You win! Paper beats Rock");
-        } else {
-            console.log("It's a tie");
-            play(getPlayerChoice(), getComputerChoice());
-        }
-    } else if (playerSelection === "scissors") {
-        if (computerSelection === "rock") {
-            console.log("You lose! Rock beats Scissors");
-        } else if (computerSelection === "Paper") {
-            console.log("You win! Scissors beats Paper");
-        } else {
-            console.log("It's a tie");
-            play(getPlayerChoice(), getComputerChoice());
-        }
+function evaluateChoices(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        console.log("It's a tie, try again!");
+        evaluateChoices(getPlayerChoice(), getComputerChoice());
+    } else if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper")) {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        return 0;
     } else {
-        console.log("wrong choice, try again");
-        play(getPlayerChoice(), getComputerChoice());
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+        return 1;
     }
 }
 
@@ -48,7 +27,7 @@ function game() {
     let playerWins = 0;
     let computerWins = 0;
     for(let i = 0; i < 5; i++) {
-        let won = play(getPlayerChoice(), getComputerChoice());
+        let won = evaluateChoices(getPlayerChoice(), getComputerChoice());
         if (won === 0) {
             playerWins++;
             console.log(`Round ${i + 1}: Player wins`);
