@@ -17,12 +17,12 @@ function getPlayerChoice() {
     return playerChoice;
 }
 
-function evaluateChoices(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     const WINNING_COMBINATIONS = ["rock,scissors", "paper,rock", "scissors,paper"];
     let combination = [playerSelection, computerSelection].join();
     if (playerSelection === computerSelection) {
         console.log("It's a tie, try again!");
-        evaluateChoices(getPlayerChoice(), getComputerChoice());
+        playRound(getPlayerChoice(), getComputerChoice());
     }
     else if ( WINNING_COMBINATIONS.includes(combination)) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`);
@@ -36,7 +36,7 @@ function evaluateChoices(playerSelection, computerSelection) {
 function game() {
     let playerWins, computerWins = 0;
     for(let i = 0; i < 5; i++) {
-        let winner = evaluateChoices(getPlayerChoice(), getComputerChoice());
+        let winner = playRound(getPlayerChoice(), getComputerChoice());
         if (winner === "player") {
             playerWins++;
             console.log(`Round ${i + 1}: Player wins`);
