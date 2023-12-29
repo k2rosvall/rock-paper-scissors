@@ -1,5 +1,6 @@
+const MOVES = ["rock", "paper", "scissors"];
+
 function getComputerChoice() {
-    const MOVES = ["rock", "paper", "scissors"];
     let index = Math.floor(Math.random() * 3);
 
     console.log(`Computer chose: ${MOVES[index]}`);
@@ -7,9 +8,13 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    let playerChoice = prompt("Select rock, paper or scissors");
-    console.log(`Player chose: ${playerChoice.toLowerCase()}`)
-    return playerChoice.toLowerCase();
+    let playerChoice;
+    do {
+        playerChoice = prompt("Please select rock, paper or scissors").toLowerCase();
+      } while (!MOVES.includes(playerChoice));
+
+    console.log(`Player chose: ${playerChoice}`)
+    return playerChoice;
 }
 
 function evaluateChoices(playerSelection, computerSelection) {
